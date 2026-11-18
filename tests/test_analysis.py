@@ -18,6 +18,8 @@ class ResearchReviewTests(unittest.TestCase):
         self.assertEqual(len(thread["interpretations"]), 1)
         self.assertEqual(len(thread["to_verify"]), 1)
         self.assertTrue(thread["has_new_observation"])
+        self.assertEqual(thread["evidence_progress"]["observed_weeks"], 1)
+        self.assertEqual(thread["evidence_progress"]["weeks_without_linked_evidence"], ["2026-W41"])
 
     def test_report_flags_unlinked_plan_without_counting_it_as_observation(self):
         report = build_report(self.records, source_revision="r3")

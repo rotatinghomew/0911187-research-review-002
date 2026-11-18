@@ -1,6 +1,7 @@
 """沿研究问题整理每周观察、解释与待验证事项。"""
 
 from collections import defaultdict
+from .evidence_analysis import summarize_evidence
 
 
 def summarize(records):
@@ -23,4 +24,7 @@ def summarize(records):
             "to_verify": [{"id": entry["id"], "claim": entry["claim"]} for entry in pending],
             "has_new_observation": bool(observations),
         }
+    evidence = summarize_evidence(records)
+    for key, thread in result.items():
+        thread["evidence_progress"] = evidence[key]
     return result
