@@ -1,4 +1,4 @@
-"""合成业务记录的读取和基础校验。"""
+"""读取并校验研究问题的周度证据记录。"""
 
 import json
 from pathlib import Path
@@ -11,10 +11,13 @@ def load_records(path):
     records = []
     seen = set()
     for position, record in enumerate(payload):
-        if not isinstance(record, dict) or not record.get("id"):
-            raise ValueError(f"第 {position + 1} 条记录缺少 id")
+        required = ("id", "week", "student", "question", "claim", "status")
+        if not isinstance(record, dict) or any(not record.get(field) for field in required):
+            raise ValueError(f"第 {position + 1} 条记录缺少研究周报必填字段")
         if record["id"] in seen:
             raise ValueError(f"重复记录标识：{record['id']}")
         seen.add(record["id"])
+        if record["status"] not in {"observed", "interpreted", "to_verify"}:
+            raise ValueError(f"记录 {record['id']} 的 status 无效")
         records.append(dict(record))
     return records
