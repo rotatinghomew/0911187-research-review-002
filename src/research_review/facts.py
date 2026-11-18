@@ -1,6 +1,7 @@
 """读取并校验研究问题的周度证据记录。"""
 
 import json
+import math
 from pathlib import Path
 
 
@@ -19,5 +20,12 @@ def load_records(path):
         seen.add(record["id"])
         if record["status"] not in {"observed", "interpreted", "to_verify"}:
             raise ValueError(f"记录 {record['id']} 的 status 无效")
+        value = record.get("value")
+        if value is not None and (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+        ):
+            raise ValueError(f"记录 {record['id']} 的 value 必须是有限数值或空值")
         records.append(dict(record))
     return records

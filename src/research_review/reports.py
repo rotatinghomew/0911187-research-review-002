@@ -1,6 +1,7 @@
 """可追溯的当前汇总报告。"""
 
 from .analysis import summarize
+from .metric_summary import summarize_cohort_metrics
 
 
 def build_report(records, source_revision=""):
@@ -10,5 +11,6 @@ def build_report(records, source_revision=""):
         "source_revision": source_revision,
         "record_count": len(records),
         "questions": summarize(records),
+        "cohort_metrics": summarize_cohort_metrics(records),
         "unlinked_records": [entry["id"] for entry in records if not entry.get("evidence")],
     }
