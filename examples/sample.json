@@ -1,20 +1,8 @@
 [
-  {
-    "id": "sample-1",
-    "period": "2026-S1",
-    "group": "A",
-    "value": 2
-  },
-  {
-    "id": "sample-2",
-    "period": "2026-S1",
-    "group": "A",
-    "value": null
-  },
-  {
-    "id": "sample-3",
-    "period": "2026-S2",
-    "group": "B",
-    "value": 4
-  }
+  {"id":"w01-e01","week":"2026-W40","student":"s-001","question":"采样窗口是否影响观测稳定性","claim":"本周两次测量差异较大","evidence":"run-101;run-102","status":"observed","value":12.4},
+  {"id":"w01-e02","week":"2026-W40","student":"s-001","question":"采样窗口是否影响观测稳定性","claim":"差异可能与设备预热有关","evidence":"lab-note-44","status":"interpreted","value":null},
+  {"id":"w01-e03","week":"2026-W40","student":"s-001","question":"采样窗口是否影响观测稳定性","claim":"下周固定预热时长后复测","evidence":"","status":"to_verify","value":null},
+  {"id":"w02-e01","week":"2026-W41","student":"s-001","question":"采样窗口是否影响观测稳定性","claim":"固定预热后差异缩小","evidence":"run-118;run-119","status":"observed","value":5.1},
+  {"id":"w02-e02","week":"2026-W41","student":"s-001","question":"采样窗口是否影响观测稳定性","claim":"预热可能是影响因素之一","evidence":"run-118;run-119","status":"interpreted","value":null},
+  {"id":"w02-e03","week":"2026-W41","student":"s-001","question":"采样窗口是否影响观测稳定性","claim":"还需在另一批次验证","evidence":"","status":"to_verify","value":null}
 ]

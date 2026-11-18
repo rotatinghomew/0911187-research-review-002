@@ -1,17 +1,19 @@
 # 研究周报复盘
 
-每周研究记录区分已验证事实、解释与待验证计划。
+用于整理研究生每周的研究进展、证据和后续验证计划。项目目前可读取带稳定标识的 UTF-8 JSON 记录，按指定字段生成描述性统计，并为汇总标记数据修订号。
 
 ## 数据约定
 
-应用使用本地合成记录，输入为 UTF-8 JSON。每条记录都应有稳定的业务标识；日期采用 ISO 8601 格式。缺失值表示未观察到，不解释为数值零。输入校验、领域整理和结果汇总彼此分离，调用方可通过 Python API 使用。
+示例记录为本地合成数据。`id` 是记录标识；`week`、`student`、`question`、`claim`、`evidence` 和 `status` 描述研究周报中的基本信息。`status` 当前可记录 `observed`、`interpreted`、`to_verify`。缺失值代表尚未观察或尚未填写，不等于数值零。日期使用 ISO 8601 格式。
 
-## 运行与测试
+## 使用与测试
 
-需要 Python 3.11 或更新版本，不依赖外部服务。执行 `python -m unittest discover -s tests -v` 运行测试。将 `src` 加入 `PYTHONPATH` 后可导入 `research_review`；核心示例见 `examples/sample.json`。
+需要 Python 3.11 或更新版本，不依赖外部服务。运行 `python -m unittest discover -s tests -v` 执行测试。将 `src` 加入 `PYTHONPATH` 后可导入 `research_review`；`examples/sample.json` 展示一组跨周的合成周报记录。
 
 ## 目录
 
-- `src/research_review/`：记录读取、领域计算及结果汇总。
-- `examples/`：本地合成数据。
-- `tests/`：输入边界与当前业务口径测试。
+- `src/research_review/facts.py`：读取并检查记录标识。
+- `src/research_review/analysis.py`：按字段汇总数值观察。
+- `src/research_review/reports.py`：构建带来源修订号的汇总。
+- `examples/`：本地合成周报。
+- `tests/`：输入、统计和报告行为测试。
